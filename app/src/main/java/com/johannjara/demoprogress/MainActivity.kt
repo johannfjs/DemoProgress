@@ -4,14 +4,20 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.johannjara.design.atom.HorizontalDivider
 import com.johannjara.design.atom.Icon
 import com.johannjara.design.molecule.AppBar
@@ -24,25 +30,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             DemoProgressTheme {
-                Scaffold(topBar = {
-                    AppBar(
-                        title = "Reto",
-                        actions = {
-                            Icon(onClick = { }, icon = Icons.Filled.Info, description = "infoIcon")
-                        })
-                }) { contentPadding ->
-                    Column(
-                        modifier = Modifier
-                            .padding(contentPadding)
-                            .padding(all = 16.dp)
-                            .fillMaxHeight()
-                            .fillMaxWidth()
-                    ) {
-                        ProgressBar(text = "Progress Bar")
-                        HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
-                        CircleProgressBar(text = "Circle Progress Bar")
-                    }
-                }
+                val navController = rememberNavController()
+                NavGraph(navController)
             }
         }
     }
